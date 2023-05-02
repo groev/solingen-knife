@@ -4,7 +4,7 @@ import { useFrame } from "@react-three/fiber";
 import { Svg } from "@react-three/drei";
 import * as THREE from "three";
 
-export default function Knife({ color, ...props }) {
+export default function Knife({ logo, ratio, color, ...props }) {
   const ref = useRef();
   const knife = useGLTF("/kitchen_knife.glb");
 
@@ -45,20 +45,28 @@ export default function Knife({ color, ...props }) {
       <mesh {...obj3} />
       <mesh {...obj4} />
       <mesh {...obj5} />
-
       <mesh {...obj6} material={matcolor} />
-      <Svg
-        rotation={[1.5, 0, 0]}
-        scale={[-0.006, 0.006, 0.006]}
-        position={[0, 0.1, 2]}
-        src={"/1205.svg"}
-      />
-      <Svg
-        rotation={[1.5, 0, 0]}
-        scale={[0.006, 0.006, 0.006]}
-        position={[-1, -0.15, 2]}
-        src={"/1205.svg"}
-      />
+
+      {logo && (
+        <>
+          <mesh rotation={[1.65, Math.PI / 1, 0]} position={[-0.5, 0.1, 2]}>
+            <planeBufferGeometry
+              attach="geometry"
+              args={[0.3 * ratio, 0.3]}
+              scale={[-0.006, 0.006, 0.006]}
+            />
+            <meshStandardMaterial transparent={true} map={logo} />
+          </mesh>
+          <mesh rotation={[1.65, 0, 0]} position={[-0.5, -0.08, 2]}>
+            <planeBufferGeometry
+              attach="geometry"
+              args={[0.3 * ratio, 0.3]}
+              scale={[0.006, 0.006, 0.006]}
+            />
+            <meshStandardMaterial transparent={true} map={logo} />
+          </mesh>
+        </>
+      )}
     </group>
   );
 }
