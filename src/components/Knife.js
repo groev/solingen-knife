@@ -38,6 +38,17 @@ export default function Knife({ logo, ratio, color, ...props }) {
     setMatColor(plastik);
   }, [color]);
 
+  function calcSize(ratio) {
+    const maxWidth = 1;
+    const maxHeight = 1;
+
+    if (ratio < 1) {
+      return [maxHeight * 0.6, maxWidth * ratio * 0.6];
+    } else {
+      return [maxHeight * ratio * 0.6, maxWidth * 0.6];
+    }
+  }
+
   return (
     <group position={[0, -10, 0]} {...props} ref={ref}>
       <mesh {...obj1} />
@@ -52,18 +63,23 @@ export default function Knife({ logo, ratio, color, ...props }) {
           <mesh rotation={[1.65, Math.PI / 1, 0]} position={[-0.5, 0.1, 2]}>
             <planeBufferGeometry
               attach="geometry"
-              args={[0.3 * ratio, 0.3]}
               scale={[-0.006, 0.006, 0.006]}
+              args={calcSize(ratio)}
             />
             <meshStandardMaterial transparent={true} map={logo} />
           </mesh>
           <mesh rotation={[1.65, 0, 0]} position={[-0.5, -0.08, 2]}>
             <planeBufferGeometry
               attach="geometry"
-              args={[0.3 * ratio, 0.3]}
+              args={calcSize(ratio)}
               scale={[0.006, 0.006, 0.006]}
             />
-            <meshStandardMaterial transparent={true} map={logo} />
+            <meshStandardMaterial
+              transparent={true}
+              map={logo}
+              roughnessMap={logo}
+              args={calcSize(ratio)}
+            />
           </mesh>
         </>
       )}
