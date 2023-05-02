@@ -73,10 +73,6 @@ export default function App() {
       </Canvas>
 
       <div className="colorpicker" onClick={() => setOpen(!open)}>
-        <div className="test" style={{ marginRight: "2rem" }}>
-          Logo
-          <input onChange={handleFileChange} type="file" />
-        </div>
         {colors &&
           colors.map((color) => {
             return (
@@ -88,6 +84,9 @@ export default function App() {
               ></div>
             );
           })}
+      </div>
+      <div className="filepicker">
+        <input onChange={handleFileChange} type="file" />
       </div>
     </>
   );

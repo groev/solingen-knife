@@ -1,6 +1,7 @@
 body {
   padding: 0;
   margin: 0;
+  font-family: "Arial";
 }
 
 #root {
@@ -30,4 +31,11 @@ body {
       transform: scale(1.3);
     }
   }
+}
+.filepicker {
+  position: fixed;
+  top: 2rem;
+  z-index: 999999;
+  left: 50%;
+  transform: translateX(-50%);
 }
